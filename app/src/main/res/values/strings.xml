@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PrimeHomeServices</string>
+    <string name="email_hint">email</string>
+    <string name="hello">Hello! Welcome Back👋</string>
+    <string name="password_hint">password</string>
+    <string name="login_btn_text">Login</string>
+    <string name="don_t_have_an_account_signup">Don\'t have an account?</string>
+    <string name="register_btn_text">Register</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="create_account">Create Account</string>
+    <string name="firstname">firstname</string>
+    <string name="lastname">lastname</string>
+    <string name="register_email">email</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="already_have_an_account">Already have an account? Login</string>
+    <string name="welcome_text">Book Your Next Service</string>
+    <string name="get_started">Get Started</string>
+    <string name="lets_get_started">Lets get started</string>
+    <string name="prime_home_services">Prime Home Services</string>
+    <string name="home">Home</string>
+
+
+</resources>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/hello_text"
+            android:layout_width="319dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/hello"
+            android:textAlignment="center"
+            android:textColor="@color/dark_blue"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            tools:ignore="TextSizeCheck" />
+
+
+        <EditText
+            android:id="@+id/loginEmail"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:autofillHints="username"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/loginPassword"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:autofillHints="password"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
+        <Button style="@style/ButtonColour"
+            android:id="@+id/SignInButton"
+            android:layout_width="312dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_rounded_corner"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="@string/login_btn_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="319dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/forgot_password"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="19sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/Donthaveaccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:text="@string/don_t_have_an_account_signup"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/registerRedirectText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="19sp"
+                android:textColor="@color/button"
+                android:text="Register"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
