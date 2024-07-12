@@ -86,19 +86,19 @@
             android:textColorHint="@color/black"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="319dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autofillHints="password"
-            android:background="@drawable/rounded_corner"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="20sp" />
+<!--        <EditText-->
+<!--            android:id="@+id/confirmPassword"-->
+<!--            android:layout_width="319dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:autofillHints="password"-->
+<!--            android:background="@drawable/rounded_corner"-->
+<!--            android:hint="@string/confirm_password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:padding="15dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/black"-->
+<!--            android:textSize="20sp" />-->
 
         <Button style="@style/ButtonColour"
             android:id="@+id/registerButton"

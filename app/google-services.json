@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "306450533777",
+    "project_id": "primehomeservices-881ee",
+    "storage_bucket": "primehomeservices-881ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306450533777:android:04fc3e527d6312ddba5e30",
+        "android_client_info": {
+          "package_name": "com.example.primehomeservices"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBp-Z8X4RPazsWstjYMk4eODe6m_Q4maM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
