@@ -1,59 +1,90 @@
 package com.example.primehomeservices;
 
+import android.text.TextUtils;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.view.View;
 
-import com.example.primehomeservices.databinding.ActivitySignInBinding;
+import java.util.Objects;
 
 public class SignInActivity extends AppCompatActivity {
-
-    private static final String TAG = "SignInActivity";
-    ActivitySignInBinding binding;
-    DatabaseHelper databaseHelper;
+    private EditText loginEmail, loginPassword;
+    private TextView registerRedirectText;
+    private Button SignInButton;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignInBinding.inflate(getLayoutInflater());
-        EdgeToEdge.enable(this);
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_sign_in);
 
-        // Initialize DatabaseHelper
-        databaseHelper = new DatabaseHelper(this);
+        loginEmail = findViewById(R.id.loginEmail);
+        loginPassword = findViewById(R.id.loginPassword);
+        SignInButton = findViewById(R.id.SignInButton);
+        registerRedirectText = findViewById(R.id.registerRedirectText);
 
-        binding.SignInButton.setOnClickListener(v -> {
-            String email = binding.loginEmail.getText().toString();
-            String password = binding.loginPassword.getText().toString();
+        mAuth = FirebaseAuth.getInstance();
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(SignInActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
-                    if (checkCredentials) {
-                        Toast.makeText(SignInActivity.this, "Login success", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), Home.class);
-                        startActivity(intent);
-
-                    } else {
-                        Toast.makeText(SignInActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Log.e(TAG, "Error checking credentials", e);
-                    Toast.makeText(SignInActivity.this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
-                }
+        SignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginUser();
             }
         });
 
-        binding.registerRedirectText.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInActivity.this, registration.class);
-            startActivity(intent);
+        registerRedirectText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, registration.class);
+                startActivity(intent);
+            }
         });
 
     }
-}
+
+    private void loginUser() {
+        String email = loginEmail.getText().toString().trim();
+        String password = loginPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SignInActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignInActivity.this, Home.class));
+                            finish();
+                        } else {
+                            Toast.makeText(SignInActivity.this, "Login failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+
+    }
+
