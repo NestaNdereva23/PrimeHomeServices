@@ -16,8 +16,10 @@
     <string name="welcome_text">Book Your Next Service</string>
     <string name="get_started">Get Started</string>
     <string name="lets_get_started">Lets get started</string>
-    <string name="prime_home_services">Prime Home Services</string>
+    <string name="prime_home_services">Services</string>
     <string name="home">Home</string>
+    <string name="services">Services</string>
+    <string name="servicename">ServiceName</string>
 
 
 </resources>
