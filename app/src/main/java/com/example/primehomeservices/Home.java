@@ -30,7 +30,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        settingsBtn = findViewById(R.id.settingBtn);
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
         homeAdapter = new HomeAdapter(dataList, this);
@@ -51,16 +50,6 @@ public class Home extends AppCompatActivity {
 
             }
         });
-
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, UploadActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 

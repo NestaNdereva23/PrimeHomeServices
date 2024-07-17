@@ -24,14 +24,6 @@
             android:textSize="24sp"
             android:layout_gravity="bottom"
             />
-        <Button style="@style/ButtonColour"
-            android:id="@+id/settingBtn"
-            android:layout_width="30dp"
-            android:layout_marginStart="200dp"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/ic_settings"
-            />
     </LinearLayout>
 
     <GridView
