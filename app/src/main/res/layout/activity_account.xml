@@ -10,21 +10,117 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/lay1"
+        android:elevation="1dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_corner"
         android:padding="16dp">
         <TextView
             android:id="@+id/textView2"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
+            android:textSize="28sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_gravity="center_vertical"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-
-            android:text="Account Settings" />
-
+            android:text="John Doe" />
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_account"
+            android:layout_marginStart="75dp"/>
     </LinearLayout>
+    <Button style="@style/CustomTheme"
+        android:id="@+id/settingsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="16dp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/lay1"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20sp"
+        android:textAlignment="textStart"
+        android:textStyle="bold"
+        android:text="Add Service"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="18sp"
+        android:background="@drawable/custombackground"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settingsBtn"
+        android:padding="16dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:columnCount="2">
+
+        <androidx.cardview.widget.CardView
+            android:elevation="1dp"
+            app:cardCornerRadius="6dp"
+            android:layout_margin="10dp">
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:padding="1dp">
+                    <ImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/settings"
+                        android:layout_centerHorizontal="true"
+                        />
+                    <TextView
+                        android:id="@+id/serviceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/profileImage"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Update Profile"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:elevation="1dp"
+            app:cardCornerRadius="6dp"
+            android:layout_margin="10dp">
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:padding="1dp">
+                <ImageView
+                    android:id="@+id/serviceImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/payment_icon"
+                    android:layout_centerHorizontal="true"
+                    />
+                <TextView
+                    android:id="@+id/servicePayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/serviceImage"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Payment"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
-
+    </GridLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

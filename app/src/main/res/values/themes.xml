@@ -7,13 +7,14 @@
 
     <style name="ButtonColour" parent="Theme.PrimeHomeServices">
         <item name="backgroundTint">#0E64D2</item>
-        <item name="rippleColor">#c5e1a5</item>
+        <item name="rippleColor">#D8DFD0</item>
     </style>
 
     <style name="Theme.PrimeHomeServices" parent="Base.Theme.PrimeHomeServices" />
 
     <style name="CustomTheme" parent="Theme.PrimeHomeServices">
-        <item name="backgroundTint">#0E64D2</item>
+        <item name="backgroundTint">#d3d3d3</item>
+        <item name="rippleColor">#D8DFD0</item>
 
     </style>
 </resources>
