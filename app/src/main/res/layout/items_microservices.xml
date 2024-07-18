@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:background="@color/white"
+    app:cardCornerRadius="6dp"
+    android:elevation="1dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp">
+        <TextView
+            android:id="@+id/microservice_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Microservice Name"
+            android:textSize="18sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/microservice_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/microservice_name"
+            android:layout_margin="10dp"
+            android:text="Price"
+            android:paddingBottom="2dp" />
+
+        <TextView
+            android:id="@+id/microservice_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/microservice_price"
+            android:layout_margin="10dp"
+            android:text="Discount"
+            android:paddingBottom="2dp" />
+
+        <TextView
+            android:id="@+id/microservice_service_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/microservice_discount"
+            android:layout_margin="10dp"
+            android:text="Service Fee"
+            android:paddingBottom="2dp" />
+
+        <TextView
+            android:id="@+id/microservice_grand_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/microservice_service_fee"
+            android:layout_margin="10dp"
+            android:text="Grand Total" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
