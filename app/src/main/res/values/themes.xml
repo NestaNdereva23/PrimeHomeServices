@@ -17,4 +17,12 @@
         <item name="rippleColor">#D8DFD0</item>
 
     </style>
+    <style name="CustomTheme2" parent="CustomTheme">
+        <item name="backgroundTint">#283891</item>
+        <item name="rippleColor">#D8DFD0</item>
+    </style>
+    <style name="BlackTheme" parent="CustomTheme2">
+        <item name="backgroundTint">#010207</item>
+        <item name="rippleColor">#D8DFD0</item>
+    </style>
 </resources>
