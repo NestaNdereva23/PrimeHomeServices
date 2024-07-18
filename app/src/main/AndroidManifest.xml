@@ -14,6 +14,9 @@
         android:theme="@style/CustomTheme"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
             android:name=".RecentActivity"
             android:exported="false" />
         <activity

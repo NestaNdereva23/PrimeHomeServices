@@ -17,7 +17,7 @@
         android:background="@drawable/rounded_corner"
         android:padding="16dp">
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/displayUsername"
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="28sp"
@@ -65,11 +65,12 @@
             app:cardCornerRadius="6dp"
             android:layout_margin="10dp">
             <RelativeLayout
+                android:id="@+id/updateUserProfile"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:padding="1dp">
                     <ImageView
-                        android:id="@+id/profileImage"
+                        android:id="@+id/updateProfile"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_margin="10dp"
@@ -81,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/profileImage"
+                        android:layout_below="@+id/updateProfile"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="Update Profile"
