@@ -110,6 +110,16 @@
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:fontFamily="@font/poppins_semibold"/>
+        <CheckBox
+            android:id="@+id/microserviceCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/microservice_name"
+            android:layout_marginStart="200dp"
+            android:text="Request"
+            android:clickable="true"
+            android:textColor="@color/green"
+            android:fontFamily="@font/poppins_semibold"/>
 
     </RelativeLayout>
 

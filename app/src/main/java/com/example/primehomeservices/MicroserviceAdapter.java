@@ -1,21 +1,28 @@
 package com.example.primehomeservices;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class MicroserviceAdapter extends RecyclerView.Adapter<MicroserviceAdapter.ViewHolder> {
-
+    private Context context;
     private List<MicroserviceClass> microservicesList;
+    private OnMicroserviceSelectedListener listener;
+
+    public MicroserviceAdapter(Context context, List<MicroserviceClass> microservicesList, OnMicroserviceSelectedListener listener) {
+        this.context = context;
+        this.microservicesList = microservicesList;
+        this.listener = listener;
+    }
 
     public MicroserviceAdapter(List<MicroserviceClass> microservicesList) {
-        this.microservicesList= microservicesList;
+        this.microservicesList = microservicesList;
     }
 
     @NonNull
@@ -33,6 +40,13 @@ public class MicroserviceAdapter extends RecyclerView.Adapter<MicroserviceAdapte
         holder.microserviceDiscount.setText(String.valueOf(microservice.getDiscount()));
         holder.microserviceServiceFee.setText(String.valueOf(microservice.getServiceFee()));
         holder.microserviceGrandTotal.setText(String.valueOf(microservice.getGrandTotal()));
+
+        holder.checkBox.setOnCheckedChangeListener(null);
+        holder.checkBox.setChecked(microservice.isSelected());
+        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            microservice.setSelected(isChecked);
+            listener.onMicroserviceSelected(microservice, isChecked);
+        });
     }
 
     @Override
@@ -46,6 +60,7 @@ public class MicroserviceAdapter extends RecyclerView.Adapter<MicroserviceAdapte
         TextView microserviceDiscount;
         TextView microserviceServiceFee;
         TextView microserviceGrandTotal;
+        CheckBox checkBox;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +69,11 @@ public class MicroserviceAdapter extends RecyclerView.Adapter<MicroserviceAdapte
             microserviceDiscount = itemView.findViewById(R.id.microservice_discount);
             microserviceServiceFee = itemView.findViewById(R.id.microservice_service_fee);
             microserviceGrandTotal = itemView.findViewById(R.id.microservice_grand_total);
+            checkBox = itemView.findViewById(R.id.microserviceCheckBox);
         }
+    }
+
+    public interface OnMicroserviceSelectedListener {
+        void onMicroserviceSelected(MicroserviceClass microservice, boolean isSelected);
     }
 }

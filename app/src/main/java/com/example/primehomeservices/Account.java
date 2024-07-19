@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.os.Handler;
 
 public class Account extends AppCompatActivity {
     Button settingsBtn;
@@ -110,7 +111,12 @@ public class Account extends AppCompatActivity {
             Toast.makeText(this, "No authenticated user found", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Account.this, UpdateProfile.class);
             startActivity(intent);
-            finish();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 1000);
         }
     }
 
