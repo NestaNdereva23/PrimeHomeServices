@@ -1,15 +1,12 @@
-package com.example.primehomeservices;// MicroserviceActivity.java
-import android.content.Intent;
+package com.example.primehomeservices;
+
 import android.os.Bundle;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.primehomeservices.MicroserviceAdapter;
-import com.example.primehomeservices.MicroserviceClass;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,12 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Microservices extends AppCompatActivity {
+public class Microservices extends AppCompatActivity implements MicroserviceAdapter.OnMicroserviceSelectedListener {
 
     private TextView serviceName;
+    private TextView paymentSummary;
+    private TextView itemTotalPrice;
+    private TextView itemTotalDiscount;
+    private TextView TotalServiceFee;
+    private TextView FinalGrandTotal;
     private RecyclerView microservicesRecyclerView;
     private MicroserviceAdapter adapter;
     private List<MicroserviceClass> microservicesList;
+    private List<MicroserviceClass> selectedMicroservices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +36,20 @@ public class Microservices extends AppCompatActivity {
         setContentView(R.layout.activity_microservices);
 
         serviceName = findViewById(R.id.service_name);
+        itemTotalPrice = findViewById(R.id.itemTotalPrice);
+        itemTotalDiscount = findViewById(R.id.itemTotalDiscount);
+        TotalServiceFee = findViewById(R.id.TotalServiceFee);
+        FinalGrandTotal = findViewById(R.id.FinalGrandTotal);
         microservicesRecyclerView = findViewById(R.id.microservices_recycler_view);
         microservicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Get the service name from the intent
-        Intent intent = getIntent();
-        String serviceNameStr = intent.getStringExtra("serviceName");
+        String serviceNameStr = getIntent().getStringExtra("serviceName");
         serviceName.setText(serviceNameStr);
 
         microservicesList = new ArrayList<>();
-        adapter = new MicroserviceAdapter(microservicesList);
+        selectedMicroservices = new ArrayList<>();
+        adapter = new MicroserviceAdapter(this, microservicesList, this);
         microservicesRecyclerView.setAdapter(adapter);
 
         fetchMicroservices(serviceNameStr);
@@ -68,24 +75,42 @@ public class Microservices extends AppCompatActivity {
                         microservicesList.add(microservice);
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle possible errors
+                Toast.makeText(Microservices.this, "Failed to load microservices", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @NonNull
-    private static MicroserviceClass getMicroserviceClass(Map.Entry<String, Object> entry) {
-        Map<String, Object> microserviceData = (Map<String, Object>) entry.getValue();
-        MicroserviceClass microservice = new MicroserviceClass(
-                (String) microserviceData.get("name"),
-                ((Long) microserviceData.get("price")).intValue(),
-                ((Long) microserviceData.get("discount")).intValue(),
-                ((Long) microserviceData.get("serviceFee")).intValue(),
-                ((Long) microserviceData.get("grandTotal")).intValue()
-        );
-        return microservice;
+    @Override
+    public void onMicroserviceSelected(MicroserviceClass microservice, boolean isSelected) {
+        if (isSelected) {
+            selectedMicroservices.add(microservice);
+        } else {
+            selectedMicroservices.remove(microservice);
+        }
+        updatePaymentSummary();
+    }
+
+    private void updatePaymentSummary() {
+        int itemTotal = 0;
+        int itemsDiscount = 0;
+        int serviceFee = 0;
+
+        for (MicroserviceClass microservice : selectedMicroservices) {
+            itemTotal += microservice.getPrice();
+            itemsDiscount += microservice.getDiscount();
+            serviceFee += microservice.getServiceFee();
+        }
+
+        int grandTotal = itemTotal + serviceFee - itemsDiscount;
+
+        itemTotalPrice.setText(String.valueOf(itemTotal));
+        itemTotalDiscount.setText(String.valueOf(itemsDiscount));
+        TotalServiceFee.setText(String.valueOf(serviceFee));
+        FinalGrandTotal.setText(String.valueOf(grandTotal));
     }
 }

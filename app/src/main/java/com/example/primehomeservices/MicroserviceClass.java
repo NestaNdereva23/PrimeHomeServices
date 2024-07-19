@@ -8,6 +8,7 @@ public class MicroserviceClass implements Serializable {
     private int price;
     private int discount;
     private int serviceFee;
+    private boolean isSelected;
 
     public void setName(String name) {
         this.name = name;
@@ -37,6 +38,7 @@ public class MicroserviceClass implements Serializable {
         this.discount = discount;
         this.serviceFee = serviceFee;
         this.grandTotal = grandTotal;
+        this.isSelected = false;
     }
 
     // Getters and setters
@@ -45,4 +47,13 @@ public class MicroserviceClass implements Serializable {
     public int getDiscount() { return discount; }
     public int getServiceFee() { return serviceFee; }
     public int getGrandTotal() { return grandTotal; }
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+
 }
