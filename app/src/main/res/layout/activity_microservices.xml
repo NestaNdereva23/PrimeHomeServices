@@ -34,7 +34,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:elevation="6dp">
+        android:elevation="8dp"
+        app:cardElevation="8dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,7 +98,7 @@
                 android:layout_marginTop="75dp"
                 android:layout_width="76dp"
                 android:layout_height="27dp"
-                android:text="59"
+                android:text="0"
                 />
             <TextView android:id="@+id/item_ServiceText"
                 android:fontFamily="@font/poppins_semibold"
@@ -120,7 +121,7 @@
                 android:layout_marginTop="100dp"
                 android:layout_width="76dp"
                 android:layout_height="27dp"
-                android:text="400"
+                android:text="0"
                 />
             <TextView android:id="@+id/GrandTotalText"
                 android:fontFamily="@font/poppins_semibold"
@@ -143,7 +144,7 @@
                 android:layout_marginTop="150dp"
                 android:layout_width="76dp"
                 android:layout_height="27dp"
-                android:text="800"
+                android:text="0"
                 />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

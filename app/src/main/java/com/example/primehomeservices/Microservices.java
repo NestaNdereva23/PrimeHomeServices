@@ -16,6 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 
 public class Microservices extends AppCompatActivity implements MicroserviceAdapter.OnMicroserviceSelectedListener {
 
@@ -108,9 +111,11 @@ public class Microservices extends AppCompatActivity implements MicroserviceAdap
 
         int grandTotal = itemTotal + serviceFee - itemsDiscount;
 
-        itemTotalPrice.setText(String.valueOf(itemTotal));
-        itemTotalDiscount.setText(String.valueOf(itemsDiscount));
-        TotalServiceFee.setText(String.valueOf(serviceFee));
-        FinalGrandTotal.setText(String.valueOf(grandTotal));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+
+        itemTotalPrice.setText(numberFormat.format(itemTotal));
+        itemTotalDiscount.setText(numberFormat.format(itemsDiscount));
+        TotalServiceFee.setText(numberFormat.format(serviceFee));
+        FinalGrandTotal.setText(numberFormat.format(grandTotal));
     }
 }
