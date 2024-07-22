@@ -7,34 +7,36 @@
     android:theme="@style/CustomTheme"
     app:cardCornerRadius="10dp"
     android:elevation="1dp"
+    app:cardElevation="8dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/customlightblue"
-        android:layout_margin="0dp">
+        android:layout_margin="0dp"
+        android:background="@color/light_blue">
+
         <TextView
             android:id="@+id/microservice_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
+            android:paddingBottom="10dp"
+            android:shadowColor="#DC3434"
             android:text="Microservice Name"
-            android:textSize="18sp"
             android:textColor="@color/red"
-            android:textStyle="bold"
-            android:paddingBottom="10dp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/microservice_priceText"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_name"
-            android:textColor="@color/black"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins_regular"
             android:text="Price"
-            android:textSize="14sp"
-            android:paddingBottom="2dp"
-            />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/microservice_price"
@@ -42,53 +44,49 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_name"
             android:layout_marginLeft="150dp"
-            android:text="800"
-            android:textSize="16sp"
-            android:textColor="@color/customblue"
             android:fontFamily="@font/poppins_semibold"
-            android:paddingBottom="2dp" />
+            android:text="800"
+            android:textColor="@color/customblue"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/microservice_discountText"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_price"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Discount"
-            android:textSize="14sp"
-            android:paddingBottom="2dp" />
+            android:fontFamily="@font/poppins_regular"
+            android:text="Discount" />
+
         <TextView
             android:id="@+id/microservice_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_price"
             android:layout_marginLeft="150dp"
-            android:text="50"
-            android:textSize="16sp"
-            android:textColor="@color/green"
             android:fontFamily="@font/poppins_semibold"
-            android:paddingBottom="2dp" />
+            android:text="50"
+            android:textColor="@color/green"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/microservice_service_feeText"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_discount"
+            android:fontFamily="@font/poppins_regular"
             android:text="Service Fee"
-            android:textSize="14sp"
-            android:fontFamily="@font/poppins_semibold"
-            android:paddingBottom="2dp" />
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/microservice_service_fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_discount"
             android:layout_marginLeft="150dp"
-            android:textColor="@color/customblue"
-            android:text="400"
-            android:textSize="16sp"
             android:fontFamily="@font/poppins_semibold"
-            android:paddingBottom="2dp" />
+            android:text="400"
+            android:textColor="@color/customblue"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/microservice_grandTotalText"
@@ -96,9 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_service_fee"
             android:fontFamily="@font/poppins_semibold"
+            android:paddingBottom="2dp"
             android:text="GrandTotal     kshs."
-            android:textSize="14sp"
-            android:paddingBottom="2dp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/microservice_grand_total"
@@ -106,20 +104,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_service_fee"
             android:layout_marginLeft="150dp"
+            android:fontFamily="@font/poppins_semibold"
             android:text="1150"
-            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/poppins_semibold"/>
+            android:textSize="16sp" />
+
         <CheckBox
             android:id="@+id/microserviceCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/microservice_name"
             android:layout_marginStart="200dp"
-            android:text="Request"
             android:clickable="true"
-            android:textColor="@color/green"
-            android:fontFamily="@font/poppins_semibold"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:singleLine="false"
+            android:soundEffectsEnabled="true"
+            android:text="Request"
+            android:textColor="@color/green" />
 
     </RelativeLayout>
 
