@@ -122,17 +122,16 @@ public class Microservices extends AppCompatActivity implements MicroserviceAdap
         itemTotalDiscount.setText(numberFormat.format(itemsDiscount));
         TotalServiceFee.setText(numberFormat.format(serviceFee));
         FinalGrandTotal.setText(numberFormat.format(grandTotal));
-
-        int finalItemTotal = itemTotal;
-        int finalItemsDiscount = itemsDiscount;
-        int finalServiceFee = serviceFee;
+        int ItemTotal = itemTotal;
+        int ItemsDiscount = itemsDiscount;
+        int ServiceFee = serviceFee;
         requestserviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Microservices.this, SummaryActivity.class);
-                intent.putExtra("itemTotal", finalItemTotal);
-                intent.putExtra("itemsDiscount", finalItemsDiscount);
-                intent.putExtra("serviceFee", finalServiceFee);
+                intent.putExtra("itemTotal", ItemTotal);
+                intent.putExtra("itemsDiscount", ItemsDiscount);
+                intent.putExtra("serviceFee", ServiceFee);
                 intent.putExtra("grandTotal", grandTotal);
                 startActivity(intent);
             }

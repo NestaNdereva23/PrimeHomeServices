@@ -84,15 +84,15 @@ public class SummaryActivity extends AppCompatActivity {
     }
     private void displayPaymentSummary(){
         Intent intent = getIntent();
-        int finalitemTotal = intent.getIntExtra("finalitemTotal", 0);
-        int itemsDiscount = intent.getIntExtra("finalitemsDiscount", 0);
-        int serviceFee = intent.getIntExtra("finalserviceFee", 0);
+        int ItemTotal = intent.getIntExtra("itemTotal", 0);
+        int ItemsDiscount = intent.getIntExtra("itemsDiscount", 0);
+        int ServiceFee = intent.getIntExtra("serviceFee", 0);
         int grandTotal = intent.getIntExtra("grandTotal", 0);
 
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        itemTotalPrice.setText(numberFormat.format(finalitemTotal));
-        itemTotalDiscount.setText(numberFormat.format(itemsDiscount));
-        TotalServiceFee.setText(numberFormat.format(serviceFee));
+        itemTotalPrice.setText(numberFormat.format(ItemTotal));
+        itemTotalDiscount.setText(numberFormat.format(ItemsDiscount));
+        TotalServiceFee.setText(numberFormat.format(ServiceFee));
         FinalGrandTotal.setText(numberFormat.format(grandTotal));
     }
     private void setupDatePicker() {
