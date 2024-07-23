@@ -10,20 +10,78 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/service_name"
+        android:id="@+id/summaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="28sp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/poppins_semibold"
         android:textAlignment="center"
         android:text="Summary"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold" />
 
+    <RelativeLayout
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/locationEditText"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_corner"
+            android:layout_marginTop="30dp"
+            android:hint="Enter Location"
+            android:layout_marginStart="10dp"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_below="@id/locationEditText"
+            android:text="Date: "
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginStart="10dp"
+            android:textSize="18sp" />
+
+        <Button style="@style/CustomTheme2"
+            android:id="@+id/dateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_below="@id/dateTextView"
+            android:text="Select Date"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_below="@id/dateButton"
+            android:text="Time: "
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginStart="10dp"/>
+
+        <Button style="@style/CustomTheme2"
+            android:id="@+id/timeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_below="@id/timeTextView"
+            android:text="Select Time"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginStart="10dp"/>
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_marginStart="0dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="30dp"
         android:layout_width="343dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
@@ -145,13 +203,13 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="50dp">
 
         <Button style="@style/CustomTheme2"
-            android:id="@+id/RequestServiceBtn"
+            android:id="@+id/proceedtoPaymentBtn"
             android:layout_width="3000dp"
             android:layout_height="67dp"
-            android:text="Proceed"
+            android:text="Proceed to Payment"
             android:textSize="16sp"
             android:fontFamily="@font/poppins_semibold"
             android:background="@drawable/rounded_corner"/>

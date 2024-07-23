@@ -1,6 +1,9 @@
 package com.example.primehomeservices;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -28,6 +31,7 @@ public class Microservices extends AppCompatActivity implements MicroserviceAdap
     private TextView itemTotalDiscount;
     private TextView TotalServiceFee;
     private TextView FinalGrandTotal;
+    private Button requestserviceBtn;
     private RecyclerView microservicesRecyclerView;
     private MicroserviceAdapter adapter;
     private List<MicroserviceClass> microservicesList;
@@ -43,6 +47,7 @@ public class Microservices extends AppCompatActivity implements MicroserviceAdap
         itemTotalDiscount = findViewById(R.id.itemTotalDiscount);
         TotalServiceFee = findViewById(R.id.TotalServiceFee);
         FinalGrandTotal = findViewById(R.id.FinalGrandTotal);
+        requestserviceBtn = findViewById(R.id.requestserviceBtn);
         microservicesRecyclerView = findViewById(R.id.microservices_recycler_view);
         microservicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -117,5 +122,25 @@ public class Microservices extends AppCompatActivity implements MicroserviceAdap
         itemTotalDiscount.setText(numberFormat.format(itemsDiscount));
         TotalServiceFee.setText(numberFormat.format(serviceFee));
         FinalGrandTotal.setText(numberFormat.format(grandTotal));
+
+        int finalItemTotal = itemTotal;
+        int finalItemsDiscount = itemsDiscount;
+        int finalServiceFee = serviceFee;
+        requestserviceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Microservices.this, SummaryActivity.class);
+                intent.putExtra("itemTotal", finalItemTotal);
+                intent.putExtra("itemsDiscount", finalItemsDiscount);
+                intent.putExtra("serviceFee", finalServiceFee);
+                intent.putExtra("grandTotal", grandTotal);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
+
+
 }

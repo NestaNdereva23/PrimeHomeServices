@@ -161,7 +161,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:background="@drawable/rounded_corner"/>
         <Button style="@style/CustomTheme2"
-            android:id="@+id/RequestServiceBtn"
+            android:id="@+id/requestserviceBtn"
             android:layout_width="190dp"
             android:layout_height="67dp"
             android:text="Request Now"
