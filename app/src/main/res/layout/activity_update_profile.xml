@@ -34,7 +34,7 @@
             android:layout_marginTop="30dp"
             android:hint="username"
             android:background="@drawable/rounded_corner"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:padding="15dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -67,8 +67,6 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
-
-
         <EditText
             android:id="@+id/updateContact"
             android:layout_width="319dp"
@@ -81,6 +79,19 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
+        <EditText
+            android:id="@+id/updateLocation"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="Location"
+            android:inputType="textMultiLine"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
+
         <Button style="@style/ButtonColour"
             android:id="@+id/updateProfileBtn"
             android:layout_width="312dp"

@@ -6,6 +6,15 @@ public class User {
     public String firstname;
     public String lastname;
     public String phoneContact;
+    public String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getUsername() {
         return username;
@@ -39,12 +48,13 @@ public class User {
         this.phoneContact = phoneContact;
     }
 
-    public User(String email, String username, String firstname, String lastname, String phoneContact) {
+    public User(String email, String username, String firstname, String lastname, String phoneContact, String location) {
         this.email = email;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phoneContact = phoneContact;
+        this.location = location;
     }
 
     public String getEmail() {

@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class UpdateProfile extends AppCompatActivity {
-    private EditText username, firstname, lastname, phoneContact;
+    private EditText username, firstname, lastname, phoneContact, location;
     private Button updateButton;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -33,6 +33,7 @@ public class UpdateProfile extends AppCompatActivity {
         firstname = findViewById(R.id.updateFirstname);
         lastname = findViewById(R.id.updateLastname);
         phoneContact = findViewById(R.id.updateContact);
+        location = findViewById(R.id.updateLocation);
         updateButton = findViewById(R.id.updateProfileBtn);
 
         mAuth = FirebaseAuth.getInstance();
@@ -51,6 +52,7 @@ public class UpdateProfile extends AppCompatActivity {
         final String userFirstname = firstname.getText().toString().trim();
         final String userLastname = lastname.getText().toString().trim();
         final String userPhoneContact = phoneContact.getText().toString().trim();
+        final String userLocation = location.getText().toString().trim();
 
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
@@ -64,7 +66,7 @@ public class UpdateProfile extends AppCompatActivity {
                     if (existingUser != null) {
                         String email = existingUser.email; // Get the existing email
 
-                        User updatedUser = new User(email, userUsername, userFirstname, userLastname, userPhoneContact);
+                        User updatedUser = new User(email, userUsername, userFirstname, userLastname, userPhoneContact, userLocation);
                         mDatabase.child("users").child(uid).setValue(updatedUser)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
