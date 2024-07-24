@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/activitySummaryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending service order"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/activityDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="18sp"
+        android:text="Date" />
+
+    <TextView
+        android:id="@+id/activityTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="18sp"
+        android:text="Time" />
+
+    <TextView
+        android:id="@+id/activityLocationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="18sp"
+        android:text="Location" />
+</LinearLayout>

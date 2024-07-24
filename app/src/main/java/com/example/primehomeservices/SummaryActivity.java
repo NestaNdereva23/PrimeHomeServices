@@ -76,7 +76,7 @@ public class SummaryActivity extends AppCompatActivity {
         proceedtoPaymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                proceedToPayment();
+                saveOrderToDatabase();
             }
         });
     }
@@ -158,12 +158,44 @@ public class SummaryActivity extends AppCompatActivity {
             }
         });
     }
-    private void proceedToPayment() {
-        // Code to proceed to the payment option screen
-        Intent intent = new Intent(SummaryActivity.this, PaymentOptionActivity.class);
-        startActivity(intent);
+    private void saveOrderToDatabase()
+    {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            String userId = firebaseUser.getUid();
+            String location = locationEditText.getText().toString();
+            String date = dateTextView.getText().toString();
+            String time = timeTextView.getText().toString();
+
+            Intent intent = getIntent();
+            int itemTotal = intent.getIntExtra("itemTotal", 0);
+            int itemsDiscount = intent.getIntExtra("itemsDiscount", 0);
+            int serviceFee = intent.getIntExtra("serviceFee", 0);
+            int grandTotal = intent.getIntExtra("grandTotal", 0);
+
+            OrdersClass order = new OrdersClass(userId, itemTotal, itemsDiscount, serviceFee, grandTotal, "pending", location, date, time);
+
+            String orderId = mDatabase.child("orders").push().getKey();
+            mDatabase.child("orders").child(orderId).setValue(order)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SummaryActivity.this, "Order saved successfully", Toast.LENGTH_SHORT).show();
+                            proceedToPayment(orderId);
+                        } else {
+                            Toast.makeText(SummaryActivity.this, "Failed to save order", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "No authenticated user found", Toast.LENGTH_SHORT).show();
+        }
     }
 
-
-
+        private void proceedToPayment(String orderId) {
+            Intent intent = new Intent(SummaryActivity.this, PaymentOptionActivity.class);
+            intent.putExtra("orderId", orderId);
+            startActivity(intent);
+        }
 }
+
+
+
