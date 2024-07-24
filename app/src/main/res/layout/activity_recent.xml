@@ -5,23 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".RecentActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:padding="16dp">
         <TextView
-            android:id="@+id/textView2"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
+            android:id="@+id/summaryText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="Recent Activities" />
-
-    </LinearLayout>
+            android:textSize="28sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textAlignment="center"
+            android:text="Recent Activities"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 
 

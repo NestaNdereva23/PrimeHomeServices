@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -80,6 +81,29 @@ public class SummaryActivity extends AppCompatActivity {
         });
     }
     private  void fetchDefaultLocation() {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null){
+            String uid = firebaseUser.getUid();
+
+            mDatabase.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null){
+                        locationEditText.setText(user.location);
+                    }else{
+                        Toast.makeText(SummaryActivity.this, "Failed to get location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(SummaryActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+
 
     }
     private void displayPaymentSummary(){
