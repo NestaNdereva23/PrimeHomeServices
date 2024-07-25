@@ -8,6 +8,9 @@
     <item android:id="@+id/navigation_services"
     android:title="Activity"
     android:icon="@drawable/ic_services"/>
+    <item android:id="@+id/navigation_summary"
+        android:title="Summary"
+        android:icon="@drawable/payment"/>
 
     <item android:id="@+id/navigation_profile"
         android:title="Account" android:icon="@drawable/ic_account"/>

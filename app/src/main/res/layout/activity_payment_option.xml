@@ -1,10 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaymentOptionActivity">
+    tools:context=".PaymentOptionActivity"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/LipanaMpesaText"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Pay with Lipa na Mpesa"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/green"/>
+    <ImageView
+        android:id="@+id/MpesaIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LipanaMpesaText"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/iconmpesa"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/AmountPayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/MpesaIcon"
+        android:layout_marginTop="50dp"
+        android:text="Amount to be payed in Kshs:"
+        android:textSize="24sp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/darkgreen"/>
+    <TextView
+        android:id="@+id/payGrandTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/AmountPayTextView"
+        android:layout_marginTop="50dp"
+        android:text="0"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/green"/>
+    <EditText
+        android:id="@+id/paymentPhonenumber"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        android:hint="+254 Enter Mpesa number*"
+        android:textColor="@color/red"
+        android:textStyle="italic"
+        android:layout_below="@id/payGrandTotal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_centerHorizontal="true"
+        android:inputType="phone"/>
+
+    <Button style="@style/CustomTheme2"
+        android:id="@+id/paynowBtn"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/paymentPhonenumber"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_rounded_corner"
+        android:layout_centerHorizontal="true"
+        android:text="Pay Now"
+        android:fontFamily="@font/poppins_semibold"/>
+
+
+
+</RelativeLayout>

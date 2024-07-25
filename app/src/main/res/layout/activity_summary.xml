@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Microservices"
-    android:padding="10dp"
     android:orientation="vertical">
 
     <TextView
@@ -207,14 +206,22 @@
 
         <Button style="@style/CustomTheme2"
             android:id="@+id/proceedtoPaymentBtn"
-            android:layout_width="3000dp"
+            android:layout_width="343dp"
             android:layout_height="67dp"
             android:text="Proceed to Payment"
             android:textSize="16sp"
+            android:layout_marginHorizontal="30dp"
             android:fontFamily="@font/poppins_semibold"
             android:background="@drawable/rounded_corner"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/bottom_nav_menu" />
 
     </RelativeLayout>
+
 
 
 </LinearLayout>

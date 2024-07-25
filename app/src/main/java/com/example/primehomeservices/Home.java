@@ -74,6 +74,10 @@ public class Home extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), RecentActivity.class));
                     finish();
                     return true;
+                } else if (itemId == R.id.navigation_summary) {
+                    startActivity(new Intent(getApplicationContext(), PaymentOptionActivity.class));
+                    finish();
+                    return true;
                 } else if (itemId == R.id.navigation_profile) {
                     startActivity(new Intent(getApplicationContext(), Account.class));
                     return true;

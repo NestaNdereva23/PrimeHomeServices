@@ -3,6 +3,7 @@ package com.example.primehomeservices;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,7 @@ public class RecentActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         fetchRecentActivities();
+        fetchGrandTotal();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.navigation_services);
@@ -64,6 +66,10 @@ public class RecentActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Home.class));
                     finish();
                     return true;
+                } else if (itemId == R.id.navigation_summary) {
+                    startActivity(new Intent(getApplicationContext(), SummaryActivity.class));
+                    finish();
+                    return true;
                 } else if (itemId == R.id.navigation_profile) {
                     startActivity(new Intent(getApplicationContext(), Account.class));
                     return true;
@@ -72,6 +78,20 @@ public class RecentActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void fetchGrandTotal() {
+
+        recentActivityAdapter.setOnItemClickListener(new RecentActivityAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(OrdersClass ordersClass) {
+                Intent intent = new Intent(RecentActivity.this, PaymentOptionActivity.class);
+                intent.putExtra("grandTotal", ordersClass.getGrandTotal());
+                intent.putExtra("orderId", ordersClass.getOrderId());
+                startActivity(intent);
+            }
+        });
+    }
+
 
     private void fetchRecentActivities() {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
@@ -86,6 +106,7 @@ public class RecentActivity extends AppCompatActivity {
                                 OrdersClass order = snapshot.getValue(OrdersClass.class);
                                 if (order != null && "pending".equals(order.getStatus())) {
                                     orders.add(order);
+                                    order.setOrderId(snapshot.getKey());
                                 }
                             }
                             // Sort orders by timestamp in descending order

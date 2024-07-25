@@ -10,6 +10,15 @@ public class OrdersClass {
     private String location;
     private String date;
     private String time;
+    private String orderId;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
     public OrdersClass() {
     }
@@ -96,6 +105,7 @@ public class OrdersClass {
         this.location = location;
         this.date = date;
         this.time = time;
+        this.orderId = orderId;
     }
 
 }

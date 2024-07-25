@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,6 +67,35 @@ public class SummaryActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_summary);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.navigation_profile) {
+                    startActivity(new Intent(getApplicationContext(), Account.class));
+                    return true;
+                } else if (itemId == R.id.navigation_services) {
+                    // Start the Service activity
+                    startActivity(new Intent(getApplicationContext(), RecentActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.navigation_summary) {
+                    startActivity(new Intent(getApplicationContext(), SummaryActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.navigation_home) {
+                    // Start the Profile activity
+                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    return true;
+                }
+                return false;
+            }
+        });
 
         //fetch and display default location
         fetchDefaultLocation();
@@ -190,11 +222,17 @@ public class SummaryActivity extends AppCompatActivity {
         }
     }
 
-        private void proceedToPayment(String orderId) {
-            Intent intent = new Intent(SummaryActivity.this, PaymentOptionActivity.class);
-            intent.putExtra("orderId", orderId);
-            startActivity(intent);
-        }
+    private void proceedToPayment(String orderId) {
+        Intent intent = new Intent(SummaryActivity.this, PaymentOptionActivity.class);
+        intent.putExtra("orderId", orderId);
+        startActivity(intent);
+    }
+
+//    private void passtoRecent(String orderId){
+//        Intent intent = new Intent(SummaryActivity.this, RecentActivity.class);
+//        intent.putExtra("orderId", orderId);
+//        startActivity(intent);
+//    }
 }
 
 

@@ -58,6 +58,10 @@ public class Account extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), RecentActivity.class));
                     finish();
                     return true;
+                } else if (itemId == R.id.navigation_summary) {
+                    startActivity(new Intent(getApplicationContext(), SummaryActivity.class));
+                    finish();
+                    return true;
                 } else if (itemId == R.id.navigation_home) {
                     // Start the Profile activity
                     startActivity(new Intent(getApplicationContext(), Home.class));

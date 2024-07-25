@@ -13,6 +13,7 @@ import java.util.List;
 public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAdapter.RecentActivityViewHolder> {
 
     private List<OrdersClass> recentActivities;
+    private OnItemClickListener onItemClickListener;
 
     public RecentActivityAdapter(List<OrdersClass> recentActivities) {
         this.recentActivities = recentActivities;
@@ -40,7 +41,15 @@ public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAd
         return recentActivities.size();
     }
 
-    public static class RecentActivityViewHolder extends RecyclerView.ViewHolder {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(OrdersClass ordersClass);
+    }
+
+    public class RecentActivityViewHolder extends RecyclerView.ViewHolder {
         TextView activitySummaryTextView;
         TextView activityDateTextView;
         TextView activityTimeTextView;
@@ -52,6 +61,16 @@ public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAd
             activityDateTextView = itemView.findViewById(R.id.activityDateTextView);
             activityTimeTextView = itemView.findViewById(R.id.activityTimeTextView);
             activityLocationTextView = itemView.findViewById(R.id.activityLocationTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
+                        onItemClickListener.onItemClick(recentActivities.get(position));
+                    }
+                }
+            });
         }
     }
 }

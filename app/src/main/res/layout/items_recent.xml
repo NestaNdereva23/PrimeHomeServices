@@ -2,40 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="6dp">
 
-    <TextView
-        android:id="@+id/activitySummaryTextView"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pending service order"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/green"
-        android:layout_marginTop="50dp"/>
+        android:elevation="8dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+        <RelativeLayout
+            android:id="@+id/pendingServiceOrder"
+            android:background="@color/lightgray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        <TextView
+            android:id="@+id/activitySummaryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending service order"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/green"
+            android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:id="@+id/activityDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:textSize="18sp"
-        android:text="Date" />
+        <TextView
+            android:id="@+id/activityDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="18sp"
+            android:text="Date"
+            android:layout_below="@id/activitySummaryTextView"/>
 
-    <TextView
-        android:id="@+id/activityTimeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:textSize="18sp"
-        android:text="Time" />
+        <TextView
+            android:id="@+id/activityTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="18sp"
+            android:text="Time"
+            android:layout_below="@id/activityDateTextView"/>
 
-    <TextView
-        android:id="@+id/activityLocationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:textSize="18sp"
-        android:text="Location" />
+        <TextView
+            android:id="@+id/activityLocationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="18sp"
+            android:text="Location"
+            android:layout_below="@id/activityTimeTextView"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
