@@ -27,6 +27,12 @@
         android:layout_marginTop="0dp"
         android:src="@drawable/iconmpesa"
         android:layout_centerHorizontal="true"/>
+<!--    <ProgressBar-->
+<!--        android:id="@+id/mProgressDialog"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/MpesaIcon"-->
+<!--        android:layout_centerHorizontal="true"/>-->
     <TextView
         android:id="@+id/AmountPayTextView"
         android:layout_width="wrap_content"

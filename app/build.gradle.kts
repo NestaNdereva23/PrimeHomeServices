@@ -1,7 +1,10 @@
+import org.gradle.initialization.Environment.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
 }
+
 
 android {
     namespace = "com.example.primehomeservices"
@@ -15,6 +18,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+//        Properties properties = new Properties()
+//        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField("String", "CONSUMER_KEY" ,"\"${project.findProperty("DARAJA_CONSUMER_KEY")}\"")
+        buildConfigField("String", "CONSUMER_SECRET" ,"\"${project.findProperty("DARAJA_CONSUMER_SECRET")}\"")
     }
 
     buildTypes {
@@ -23,6 +32,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -30,6 +40,7 @@ android {
     buildToolsVersion = "34.0.0"
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -64,6 +75,9 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("com.squareup.picasso:picasso:(insert latest version")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+    implementation ("com.jakewharton.timber:timber:4.7.1")
+
 }
 
 
