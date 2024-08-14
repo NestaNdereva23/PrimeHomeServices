@@ -7,7 +7,7 @@ public class User {
     public String lastname;
     public String phoneContact;
     public String location;
-    public String profilePictureUrl;
+
 
     public String getLocation() {
         return location;
@@ -49,14 +49,13 @@ public class User {
         this.phoneContact = phoneContact;
     }
 
-    public User(String email, String username, String firstname, String lastname, String phoneContact, String location, String profilePictureUrl) {
+    public User(String email, String username, String firstname, String lastname, String phoneContact, String location) {
         this.email = email;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phoneContact = phoneContact;
         this.location = location;
-        this.profilePictureUrl = profilePictureUrl;
     }
 
     public String getEmail() {

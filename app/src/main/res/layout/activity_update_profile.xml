@@ -91,16 +91,16 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
-        <Button style="@style/ButtonColour"
-            android:id="@+id/takePictureBtn"
-            android:layout_width="312dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/btn_rounded_corner"
-            android:text="Take Profile Picture"
-            android:textAlignment="center"
-            android:textSize="16sp" />
+<!--        <Button style="@style/ButtonColour"-->
+<!--            android:id="@+id/takePictureBtn"-->
+<!--            android:layout_width="312dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="@drawable/btn_rounded_corner"-->
+<!--            android:text="Take Profile Picture"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="16sp" />-->
 
         <Button style="@style/ButtonColour"
             android:id="@+id/updateProfileBtn"

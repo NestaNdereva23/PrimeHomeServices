@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -66,11 +67,7 @@ public class RecentActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Home.class));
                     finish();
                     return true;
-                } else if (itemId == R.id.navigation_summary) {
-                    startActivity(new Intent(getApplicationContext(), SummaryActivity.class));
-                    finish();
-                    return true;
-                } else if (itemId == R.id.navigation_profile) {
+                }else if (itemId == R.id.navigation_profile) {
                     startActivity(new Intent(getApplicationContext(), Account.class));
                     return true;
                 }

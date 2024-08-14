@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.primehomeservices.services.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,11 +27,14 @@ public class SignInActivity extends AppCompatActivity {
     private TextView registerRedirectText;
     private Button SignInButton;
     private FirebaseAuth mAuth;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
@@ -74,6 +79,8 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get user ID
+                            sessionManager.createLoginSession(userId);
                             Toast.makeText(SignInActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this, Home.class));
                             finish();

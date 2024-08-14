@@ -33,7 +33,6 @@ public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAd
         holder.activityDateTextView.setText(order.getDate());
         holder.activityTimeTextView.setText(order.getTime());
         holder.activityLocationTextView.setText(order.getLocation());
-        // Optionally, bind other fields like grand total, item total, etc.
     }
 
     @Override

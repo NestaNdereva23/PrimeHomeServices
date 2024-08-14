@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.primehomeservices.services.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +22,7 @@ public class Home extends AppCompatActivity {
     GridView gridView;
     ArrayList<DataClass> dataList;
     HomeAdapter homeAdapter;
+    SessionManager sessionManager;
 
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Images");
 
@@ -27,6 +30,16 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Initialize SessionManager
+        sessionManager = new SessionManager(getApplicationContext());
+
+        // Check if the user is logged in
+        if (!sessionManager.isLoggedIn()) {
+            Intent intent = new Intent(Home.this, SignInActivity.class);
+            startActivity(intent);
+            finish(); // Close the Home Activity
+        }
 
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
@@ -68,14 +81,10 @@ public class Home extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.navigation_home) {
-                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    // No need to recreate Home Activity
                     return true;
                 } else if (itemId == R.id.navigation_services) {
                     startActivity(new Intent(getApplicationContext(), RecentActivity.class));
-                    finish();
-                    return true;
-                } else if (itemId == R.id.navigation_summary) {
-                    startActivity(new Intent(getApplicationContext(), PaymentOptionActivity.class));
                     finish();
                     return true;
                 } else if (itemId == R.id.navigation_profile) {
