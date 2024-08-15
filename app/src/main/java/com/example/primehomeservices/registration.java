@@ -1,6 +1,8 @@
 package com.example.primehomeservices;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +27,8 @@ public class registration extends AppCompatActivity {
     private Button registerButton;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class registration extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        dbHelper = new DatabaseHelper(this);
+        db = dbHelper.getWritableDatabase();
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +81,7 @@ public class registration extends AppCompatActivity {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             if (firebaseUser != null) {
                                 String uid = firebaseUser.getUid();
-                                createUserProfile(uid, email);
+                                createUserProfile(uid, email, password);
                             }
                         } else {
                             Toast.makeText(registration.this, "Registration failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -84,16 +90,27 @@ public class registration extends AppCompatActivity {
                 });
     }
 
-    private void createUserProfile(String uid, String email) {
+    private void createUserProfile(String uid, String email, String password) {
+        // Store the user profile in Firebase
         User user = new User(email);
         mDatabase.child("users").child(uid).setValue(user)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(registration.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(registration.this, SignInActivity.class));
-                            finish();
+                            // Insert user credentials into SQLite database
+                            ContentValues values = new ContentValues();
+                            values.put(DatabaseHelper.COLUMN_EMAIL, email);
+                            values.put(DatabaseHelper.COLUMN_PASSWORD, password);
+
+                            long newRowId = db.insert(DatabaseHelper.TABLE_USERS, null, values);
+                            if (newRowId != -1) {
+                                Toast.makeText(registration.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(registration.this, SignInActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(registration.this, "Failed to store credentials locally", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(registration.this, "Failed to create user profile", Toast.LENGTH_SHORT).show();
                         }

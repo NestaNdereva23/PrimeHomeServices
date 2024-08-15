@@ -1,13 +1,16 @@
 package com.example.primehomeservices;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.primehomeservices.services.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +28,9 @@ public class Home extends AppCompatActivity {
     SessionManager sessionManager;
 
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Images");
+
+    private Handler handler = new Handler();
+    private Runnable networkCheckRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,45 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        loadDataFromFirebase();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.navigation_home) {
+                    return true;
+                } else if (itemId == R.id.navigation_services) {
+                    startActivity(new Intent(getApplicationContext(), RecentActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.navigation_profile) {
+                    startActivity(new Intent(getApplicationContext(), Account.class));
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        // Periodically check network status
+        networkCheckRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (isNetworkAvailable()) {
+                    // Load data from Firebase when network is available
+                    loadDataFromFirebase();
+                }
+                handler.postDelayed(this, 5000); // Check every 5 seconds
+            }
+        };
+        handler.post(networkCheckRunnable);
+    }
+
+    private void loadDataFromFirebase() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,31 +113,20 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle error
             }
         });
+    }
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.navigation_home) {
-                    // No need to recreate Home Activity
-                    return true;
-                } else if (itemId == R.id.navigation_services) {
-                    startActivity(new Intent(getApplicationContext(), RecentActivity.class));
-                    finish();
-                    return true;
-                } else if (itemId == R.id.navigation_profile) {
-                    startActivity(new Intent(getApplicationContext(), Account.class));
-                    return true;
-                }
-                return false;
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(networkCheckRunnable); // Stop the network check when activity is destroyed
     }
 }

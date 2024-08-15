@@ -1,4 +1,4 @@
-package com.example.primehomeservices.services;
+package com.example.primehomeservices;
 
 import android.content.Context;
 import android.content.SharedPreferences;
