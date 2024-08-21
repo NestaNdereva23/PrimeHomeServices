@@ -36,12 +36,14 @@ import com.example.primehomeservices.mymodels.STKPush;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 import timber.log.Timber;
-//import timber.log.Timber;
 
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
+
 public class PaymentOptionActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView payGrandTotal;
     private EditText paymentPhonenumber;
@@ -194,5 +196,10 @@ public class PaymentOptionActivity extends AppCompatActivity implements View.OnC
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         payGrandTotal.setText(numberFormat.format(grandTotal));
     }
+
+//    public interface BackendService{
+//        @POST("stkpush/")
+//        Call<Void> initiateStkPush(@Body STKPushRequest stkPushRequest);
+//    }
 
 }
