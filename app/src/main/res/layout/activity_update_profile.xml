@@ -19,7 +19,7 @@
             android:id="@+id/hello_text"
             android:layout_width="319dp"
             android:layout_height="48dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="Profile Update"
             android:textAlignment="center"
@@ -32,21 +32,24 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp">
+            android:padding="6dp">
 
             <ImageView
                 android:id="@+id/profilePhoto"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@drawable/btn_rounded_corner"/>
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:src="@drawable/ic_account"
+
+                />
 
             <Button style="@style/ButtonColour"
                 android:id="@+id/btnTakePicture"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_rounded_corner"
                 android:layout_toRightOf="@id/profilePhoto"
-                android:text="ProfilePicture"/>
+                android:text="takePicture"/>
 
 
         </RelativeLayout>
@@ -59,7 +62,7 @@
             android:hint="username"
             android:background="@drawable/rounded_corner"
             android:inputType="text"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
@@ -69,12 +72,12 @@
             android:id="@+id/updateFirstname"
             android:layout_width="319dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:autofillHints="username"
             android:background="@drawable/rounded_corner"
             android:hint="@string/firstname"
             android:inputType="text"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
@@ -83,11 +86,11 @@
             android:id="@+id/updateLastname"
             android:layout_width="319dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corner"
             android:hint="@string/lastname"
             android:inputType="text"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
@@ -95,11 +98,11 @@
             android:id="@+id/updateContact"
             android:layout_width="319dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corner"
             android:hint="Contact"
             android:inputType="phone"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
@@ -107,31 +110,20 @@
             android:id="@+id/updateLocation"
             android:layout_width="319dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corner"
             android:hint="Location"
             android:inputType="textMultiLine"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp" />
-<!--        <Button style="@style/ButtonColour"-->
-<!--            android:id="@+id/takePictureBtn"-->
-<!--            android:layout_width="312dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/btn_rounded_corner"-->
-<!--            android:text="Take Profile Picture"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textSize="16sp" />-->
-
         <Button style="@style/ButtonColour"
             android:id="@+id/updateProfileBtn"
             android:layout_width="312dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btn_rounded_corner"
             android:text="UpdateProfile"
             android:textAlignment="center"

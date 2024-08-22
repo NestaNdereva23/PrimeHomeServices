@@ -7,6 +7,8 @@ public class User {
     public String lastname;
     public String phoneContact;
     public String location;
+    public String profileImageUrl;
+
 
 
     public String getLocation() {
@@ -49,13 +51,14 @@ public class User {
         this.phoneContact = phoneContact;
     }
 
-    public User(String email, String username, String firstname, String lastname, String phoneContact, String location) {
+    public User(String email, String username, String firstname, String lastname, String phoneContact, String location, String profileImageUrl) {
         this.email = email;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phoneContact = phoneContact;
         this.location = location;
+        this.profileImageUrl = profileImageUrl;
     }
 
     public String getEmail() {
@@ -73,4 +76,13 @@ public class User {
     public User(String email) {
         this.email = email;
     }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
 }

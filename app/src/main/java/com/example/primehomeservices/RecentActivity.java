@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -22,10 +25,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RecentActivity extends AppCompatActivity {
     private RecyclerView recentActivityRecyclerView;
@@ -38,6 +45,9 @@ public class RecentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent);
+
+        // Schedule the WorkManager to run the CheckPendingOrdersWorker every hour
+        CheckPendingOrdersWorker.scheduleWorker(this);
 
         recentActivityRecyclerView = findViewById(R.id.recentActivityRecyclerView);
         recentActivityRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -99,18 +109,27 @@ public class RecentActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             List<OrdersClass> orders = new ArrayList<>();
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 OrdersClass order = snapshot.getValue(OrdersClass.class);
                                 if (order != null && "pending".equals(order.getStatus())) {
-                                    orders.add(order);
                                     order.setOrderId(snapshot.getKey());
+                                    orders.add(order);
+
                                 }
                             }
                             // Sort orders by timestamp in descending order
                             Collections.sort(orders, new Comparator<OrdersClass>() {
                                 @Override
                                 public int compare(OrdersClass o1, OrdersClass o2) {
-                                    return String.CASE_INSENSITIVE_ORDER.compare(o2.getTime(), o1.getTime());
+                                    try {
+                                        Date date1 = sdf.parse(o1.getTime());
+                                        Date date2 = sdf.parse(o2.getTime());
+                                        return date2.compareTo(date1); // Descending order
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                        return 0;
+                                    }
                                 }
                             });
                             updateUI(orders);

@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +29,7 @@ public class Account extends AppCompatActivity {
     Button settingsBtn;
     RelativeLayout updateUserProfile;
     private TextView displayUsername;
+    private ImageView displayUserPhoto;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -36,6 +40,7 @@ public class Account extends AppCompatActivity {
         setContentView(R.layout.activity_account);
 
         displayUsername = findViewById(R.id.displayUsername);
+        displayUserPhoto = findViewById(R.id.displayUserPhoto);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -97,6 +102,16 @@ public class Account extends AppCompatActivity {
                     User user = dataSnapshot.getValue(User.class);
                     if (user != null) {
                         displayUsername.setText(user.username);
+
+                        if (user.getProfileImageUrl() != null && !user.getProfileImageUrl().isEmpty()) {
+                            Glide.with(Account.this)
+                                    .load(user.getProfileImageUrl())
+                                    .circleCrop()
+                                    .into(displayUserPhoto);
+                        } else {
+                            // Optionally, set a default image if the user has no profile image
+                            displayUserPhoto.setImageResource(R.drawable.ic_account);
+                        }
                     } else {
                         Toast.makeText(Account.this, "Failed to load user profile", Toast.LENGTH_SHORT).show();
                     }

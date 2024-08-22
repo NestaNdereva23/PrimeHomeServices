@@ -75,8 +75,9 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("com.squareup.picasso:picasso:(insert latest version")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
-
+    implementation ("androidx.work:work-runtime:2.9.1")
     implementation ("com.jakewharton.timber:timber:4.7.1")
+    implementation ("com.google.guava:guava:29.0-android")
 
 }
 
