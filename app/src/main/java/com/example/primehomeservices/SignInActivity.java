@@ -2,6 +2,7 @@ package com.example.primehomeservices;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -90,6 +91,14 @@ public class SignInActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 sessionManager.createLoginSession(userId);
+
+                                // Store user session data using SharedPreferences
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("userId", userId); // Store the user ID or token
+                                editor.putBoolean("isLoggedIn", true); // Mark the user as logged in
+                                editor.apply();
+
                                 Toast.makeText(SignInActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignInActivity.this, Home.class));
                                 finish();
@@ -101,6 +110,13 @@ public class SignInActivity extends AppCompatActivity {
         } else {
             // Offline Authentication using SQLite
             if (authenticateOffline(email, password)) {
+                // Store user session data using SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userId", email); //
+                editor.putBoolean("isLoggedIn", true); // Mark the user as logged in
+                editor.apply();
+
                 Toast.makeText(SignInActivity.this, "Offline Login successful", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SignInActivity.this, Home.class));
                 finish();
