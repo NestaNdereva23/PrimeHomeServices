@@ -15,12 +15,26 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
+
 public class DarajaApiClient {
     private Retrofit retrofit;
     private boolean isDebug;
     private boolean isGetAccessToken;
     private String mAuthToken;
     private HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+
+
+    public DarajaApiClient() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://127.0.0.1:8000/") //
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    public <T> T createService(Class<T> serviceClass) {
+        return retrofit.create(serviceClass);
+    }
+
 
     public DarajaApiClient setIsDebug(boolean isDebug) {
         this.isDebug = isDebug;
@@ -56,10 +70,9 @@ public class DarajaApiClient {
         return okHttpClient;
     }
 
-    private Retrofit getRestAdapter() {
-
+    private Retrofit getRestAdapter(String baseUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();
-        builder.baseUrl(BASE_URL);
+        builder.baseUrl(baseUrl);
         builder.addConverterFactory(GsonConverterFactory.create());
 
         if (isDebug) {
@@ -67,15 +80,6 @@ public class DarajaApiClient {
         }
 
         OkHttpClient.Builder okhttpBuilder = okHttpClient();
-
-//        if (isGetAccessToken) {
-//            okhttpBuilder.addInterceptor(new AccessTokenInterceptor());
-//        }
-//
-//        if (mAuthToken != null && !mAuthToken.isEmpty()) {
-//            okhttpBuilder.addInterceptor(new AuthInterceptor(mAuthToken));
-//        }
-
         builder.client(okhttpBuilder.build());
 
         retrofit = builder.build();
@@ -84,6 +88,6 @@ public class DarajaApiClient {
     }
 
     public STKPushService mpesaService() {
-        return getRestAdapter().create(STKPushService.class);
+        return getRestAdapter(BASE_URL).create(STKPushService.class);
     }
 }

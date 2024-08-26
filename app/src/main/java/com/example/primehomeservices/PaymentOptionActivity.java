@@ -13,6 +13,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.primehomeservices.mymodels.STKPushRequest;
 import com.example.primehomeservices.services.DarajaApiClient;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,7 @@ import static com.example.primehomeservices.Constants.CALLBACKURL;
 import static com.example.primehomeservices.Constants.TRANSACTION_TYPE;
 
 import com.example.primehomeservices.mymodels.AccessToken;
-import com.example.primehomeservices.mymodels.STKPush;
+import com.example.primehomeservices.mymodels.STKPushRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -116,47 +117,25 @@ public class PaymentOptionActivity extends AppCompatActivity implements View.OnC
 
     public void performSTKPush(String phone_number, String amount) {
         mProgressDialog.show();
-        String timestamp = Utils.getTimestamp();
-        String sanitizedPhoneNumber = Utils.sanitizePhoneNumber(phone_number);
-        String password = Utils.getPassword(Constants.BUSINESS_SHORT_CODE, Constants.PASSKEY, timestamp);
-        STKPush stkPush = new STKPush(
-                Constants.BUSINESS_SHORT_CODE,
-                password,
-                timestamp,
-                Constants.TRANSACTION_TYPE,
-                amount,
-                sanitizedPhoneNumber, // PartyA
-                Constants.PARTYB,
-                sanitizedPhoneNumber, // PhoneNumber
-                "https://entz56nsewtb.x.pipedream.net/", // Make sure this is correct
-                "Order-" + System.currentTimeMillis(), // Unique AccountReference
-                "PrimeHome STK PUSH by PHSoft"
-        );
 
-        mApiClient.setGetAccessToken(false);
+        STKPushRequest stkPushRequest = new STKPushRequest(phone_number, amount);
 
-        mApiClient.mpesaService().sendPush(stkPush).enqueue(new Callback<STKPush>() {
+        BackendService backendService = mApiClient.createService(BackendService.class);
+        backendService.initiateStkPush(stkPushRequest).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(@NonNull Call<STKPush> call, @NonNull Response<STKPush> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 mProgressDialog.dismiss();
                 if (response.isSuccessful()) {
-                    Timber.d("post submitted to API. %s", response.body());
                     Toast.makeText(PaymentOptionActivity.this, "Payment initiated successfully", Toast.LENGTH_SHORT).show();
                 } else {
-                    try {
-                        Timber.e("Response %s", response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
+                    Toast.makeText(PaymentOptionActivity.this, "Payment initiation failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<STKPush> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 mProgressDialog.dismiss();
-                Timber.e(t, "Request failed");
-                Toast.makeText(PaymentOptionActivity.this, "Payment request failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PaymentOptionActivity.this, "Request failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -197,9 +176,9 @@ public class PaymentOptionActivity extends AppCompatActivity implements View.OnC
         payGrandTotal.setText(numberFormat.format(grandTotal));
     }
 
-//    public interface BackendService{
-//        @POST("stkpush/")
-//        Call<Void> initiateStkPush(@Body STKPushRequest stkPushRequest);
-//    }
+    public interface BackendService{
+        @POST("stkpush/")
+        Call<Void> initiateStkPush(@Body STKPushRequest stkPushRequest);
+    }
 
 }
