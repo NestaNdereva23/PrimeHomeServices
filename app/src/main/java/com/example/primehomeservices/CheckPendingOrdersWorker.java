@@ -89,7 +89,7 @@ public class CheckPendingOrdersWorker extends Worker {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("Pending Order Reminder")
-                .setContentText("You have a pending order for over 10 minutes: " + order.getOrderId())
+                .setContentText("You have a pending order for over 10 minutes: " ) //+ order.getOrderId()
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
